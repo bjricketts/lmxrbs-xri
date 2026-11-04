@@ -1,0 +1,38 @@
+[project]
+name = "lmxrbs-xri"
+dynamic = ["version"]
+description = "Low-mass X-ray binaries for an X-ray interferometer: GRS 1915+105 and Cyg X-2 with xrimodel and XRISALIS"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.0",
+    "scipy>=1.13",
+    "matplotlib>=3.9",
+    "xrimodel[engine] @ git+https://github.com/X-ray-interferometry/xrimodel.git",
+    "xrisalis @ git+https://github.com/X-ray-interferometry/XRISALIS.git@xrimodel-integration",
+    # XSPEC models (compTT for Cyg X-2, pexmon reflection); GPL-3.0-or-later
+    "xspectrampoline",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "jupyterlab", "nbformat", "nbclient", "ipykernel"]
+
+[build-system]
+requires = ["setuptools>=77.0", "setuptools_scm>=9.2"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+fallback_version = "0.1.0.dev0"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+ignore = ["C408"]
